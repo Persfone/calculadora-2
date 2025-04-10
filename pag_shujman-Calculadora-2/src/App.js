@@ -119,7 +119,7 @@ function App() {
       >
         {/* Calculadora */}
         <div className="flex flex-col items-center w-full max-w-sm bg-transparent p-6 rounded-xl">
-          <h1 className="text-5xl mb-6 font-extrabold text-sky-400 drop-shadow">CalculaDOUra</h1>
+          <h1 className="text-5xl mb-6 font-extrabold text-red-800 drop-shadow">Calculadora</h1>
           <input
             type="text"
             value={input}
@@ -150,7 +150,7 @@ function App() {
         {/* Historial */}
         {historial.length > 0 && (
           <div className="bg-transparent rounded-xl p-6 w-72 max-h-[500px] overflow-y-auto">
-            <h2 className="text-red-800 font-bold mb-4 text-2xl text-center drop-shadow">HistoREAL</h2>
+            <h2 className="text-red-800 font-bold mb-4 text-2xl text-center drop-shadow">Historial</h2>
             <ul className="list-disc pl-5 space-y-2 text-2xl text-zinc-200">
               {historial.map((op, idx) => (
                 <li
