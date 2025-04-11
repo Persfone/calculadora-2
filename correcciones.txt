@@ -1,0 +1,4 @@
+. que no se puedan poner signos juntos
+. cosas por teclado
+. orden de los casilleros
+. imagenes
