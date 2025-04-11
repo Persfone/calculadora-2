@@ -2,3 +2,4 @@
 . cosas por teclado
 . orden de los casilleros
 . imagenes
+. separar codigo (animaciones, base calculadora)
