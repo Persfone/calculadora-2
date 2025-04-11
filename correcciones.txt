@@ -3,3 +3,4 @@
 . orden de los casilleros
 . imagenes
 . separar codigo (animaciones, base calculadora)
+. cuando se divide por 0 devuelve NaN, malisimo.
