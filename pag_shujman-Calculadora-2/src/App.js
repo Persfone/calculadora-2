@@ -1,22 +1,16 @@
-import { useState, useEffect, useRef} from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Boton from './boton';
 import { parseAndEvaluate } from './parser';
+import Animaciones from './Animaciones';
 import './App.css';
 
 function App() {
   const [input, setInput] = useState('');
   const [historial, setHistorial] = useState([]);
   const [indiceHistorial, setIndiceHistorial] = useState(-1);
+  const [showAnimaciones, setShowAnimaciones] = useState(false);
   const audioRef = useRef(null);
-
   const timeoutRef = useRef(null);
-  const [showImages, setShowImages] = useState(false);
-
-  const imageUrls = [
-    '/llamada.png',
-    '/react.png',
-    '/tarea.jpg'
-  ];
 
   const agregarCaracter = (char) => setInput((prev) => prev + char);
   const resetearCalculadora = () => setInput('');  
@@ -34,15 +28,14 @@ function App() {
   
       setIndiceHistorial(-1);
   
-    
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      setShowImages(true);
+      setShowAnimaciones(true); // Cambiado a setShowAnimaciones
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
         audioRef.current.play().catch(e => console.log('Error al reproducir audio:', e));
       }
       timeoutRef.current = setTimeout(() => {
-        setShowImages(false);
+        setShowAnimaciones(false); // Cambiado a setShowAnimaciones
       }, 19000);
   
     } catch {
@@ -93,25 +86,7 @@ function App() {
 
   return (
     <>
-      {showImages && (
-        <>
-          <img 
-            src={imageUrls[1]} 
-            alt="Imagen 1" 
-            className="absolute top-24 left-4 w-49 h-49 z-10 animate-pulse"
-          />
-          <img 
-            src={imageUrls[0]} 
-            alt="Imagen 2" 
-            className="absolute bottom-16 right-80 w-48 h-48 z-10 animate-spin"
-          />
-          <img 
-            src={imageUrls[2]} 
-            alt="Imagen 3" 
-            className="absolute top-24 right-32 w-50 h-50 z-0 animate-bounce"
-          />
-        </>
-      )}
+      <Animaciones show={showAnimaciones} />
   
       <div
         className="min-h-screen w-full bg-cover bg-center flex flex-row justify-center items-start p-8 gap-8"
