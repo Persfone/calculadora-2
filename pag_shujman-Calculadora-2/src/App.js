@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Boton from './boton';
 import { parseAndEvaluate } from './parser';
 import Animaciones from './Animaciones';
+import Audio from './Audio';
 import './App.css';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   const [historial, setHistorial] = useState([]);
   const [indiceHistorial, setIndiceHistorial] = useState(-1);
   const [showAnimaciones, setShowAnimaciones] = useState(false);
-  const audioRef = useRef(null);
+  const [playAudio, setPlayAudio] = useState(false);
   const timeoutRef = useRef(null);
 
   const agregarCaracter = (char) => setInput((prev) => prev + char);
@@ -29,13 +30,12 @@ function App() {
       setIndiceHistorial(-1);
   
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      setShowAnimaciones(true); // Cambiado a setShowAnimaciones
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(e => console.log('Error al reproducir audio:', e));
-      }
+      setShowAnimaciones(true);
+      setPlayAudio(true);
+      
       timeoutRef.current = setTimeout(() => {
-        setShowAnimaciones(false); // Cambiado a setShowAnimaciones
+        setShowAnimaciones(false);
+        setPlayAudio(false);
       }, 19000);
   
     } catch {
@@ -48,10 +48,6 @@ function App() {
     const soloPermitidos = valor.replace(/[^\d+\-*/().]/g, '');  
     setInput(soloPermitidos);
   };
-
-  useEffect(() => {
-    audioRef.current = new Audio('/intro.mp3');
-  }, []);
 
   useEffect(() => {
     const manejarTecla = (e) => {
@@ -87,6 +83,7 @@ function App() {
   return (
     <>
       <Animaciones show={showAnimaciones} />
+      <Audio play={playAudio} />
   
       <div
         className="min-h-screen w-full bg-cover bg-center flex flex-row justify-center items-start p-8 gap-8"
