@@ -74,6 +74,12 @@ function App() {
           return nuevoIndice;
         });
       }
+      try {
+          const resultado = parseAndEvaluate(input);
+          setInput(resultado.toString());
+        } catch {
+          setInput("Syntax Error");
+        }
     };
 
     window.addEventListener("keydown", manejarTecla);
